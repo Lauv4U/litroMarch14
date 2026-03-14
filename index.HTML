@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Litro — The simplest POS for Filipino stores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #1A8A6F;
+      --gold: #F2C94C;
+      --ink: #0D1F1A;
+      --body: #3D5450;
+      --muted: #8AADA6;
+      --border: #D4E8E3;
+      --bg: #F5FAF8;
+      --white: #FFFFFF;
+      --dark: #071812;
+      --dark-card: #0D2A22;
+      --dark-b: #163D31;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: var(--dark);
+      color: var(--bg);
+      padding: 6rem 0 5rem;
+      border-bottom: 4px solid var(--green);
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 span { color: var(--green); }
+    .hero p {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    /* General Sections */
+    section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    
+    .section-header { margin-bottom: 3rem; }
+    .section-header h2 { font-size: 2.5rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .section-header p { font-size: 1.1rem; color: var(--body); max-width: 650px; }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* Grid Layouts */
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); border-color: var(--green); }
+    .card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--ink); }
+    .card p { font-size: 0.95rem; color: var(--body); }
+
+    .card.dark-mode {
+      background: var(--dark-card);
+      border-color: var(--dark-b);
+      color: var(--bg);
+    }
+    .card.dark-mode h3 { color: var(--bg); }
+    .card.dark-mode p { color: var(--muted); }
+
+    /* Numbered Badges */
+    .badge {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      width: 28px; height: 28px;
+      text-align: center;
+      line-height: 28px;
+      border-radius: 6px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Lists */
+    ul.feature-list { list-style: none; margin-top: 1rem; }
+    ul.feature-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--body);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    ul.feature-list li:last-child { border-bottom: none; }
+    ul.feature-list li::before { content: '→'; color: var(--green); font-weight: bold; }
+
+    .tag {
+      background: var(--bg);
+      color: var(--green);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    /* Revenue Engine */
+    .revenue-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .revenue-row:last-child { border-bottom: none; }
+    .rev-phase { font-size: 0.8rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .rev-title { font-size: 1.25rem; font-weight: 700; font-family: 'Bricolage Grotesque', sans-serif; }
+    
+    /* Dark Footer / Open Questions */
+    .footer-section { background: var(--dark); color: var(--bg); padding: 5rem 0; }
+    .footer-section h2 { color: var(--white); }
+    .question-list { list-style: none; display: grid; gap: 1rem; }
+    .question-list li {
+      background: var(--dark-card);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--dark-b);
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .question-list li span { font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <h1>LITRO<span>.</span></h1>
+      <p>The store app that anyone can set up in under 10 minutes — no training, no IT, no consultant needed.</p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+        <span class="tag" style="background: rgba(26,138,111,0.1); border:none;">Sari-sari</span>
+        <span class="tag" style="background: rgba(26,138,111,0.1); border:none;">Boutique</span>
+        <span class="tag" style="background: rgba(26,138,111,0.1); border:none;">Carenderia</span>
+        <span class="tag" style="background: rgba(26,138,111,0.1); border:none;">Ukay-ukay</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="container">
+    <div class="section-header">
+      <span class="eyebrow">The Target & Advantage</span>
+      <h2>Built for the 1–3 staff store.</h2>
+      <p>Often family-run, first-time tech users operating in places where the internet sometimes disappears. Our unfair advantage is absolute simplicity. Easiest POS to set up. One-thumb operation. Works offline. Passes the Lola test.</p>
+    </div>
+
+    <span class="eyebrow">The 5 Simplicity Rules</span>
+    <div class="grid grid-2" style="margin-top: 1.5rem;">
+      <div class="card">
+        <div class="badge">1</div>
+        <h3>10-minute setup rule</h3>
+        <p>From download to first sale in under 10 minutes. Max 3 decisions during setup.</p>
+      </div>
+      <div class="card">
+        <div class="badge">2</div>
+        <h3>One-thumb rule</h3>
+        <p>Every core action works on one hand, on a mid-range Android phone.</p>
+      </div>
+      <div class="card">
+        <div class="badge">3</div>
+        <h3>No-internet rule</h3>
+        <p>POS, inventory, and receipts work with zero connectivity. Never show a connection error during a sale.</p>
+      </div>
+      <div class="card">
+        <div class="badge">4</div>
+        <h3>Lola test</h3>
+        <p>A 65-year-old must figure out any screen in 5 seconds without reading anything.</p>
+      </div>
+      <div class="card dark-mode" style="grid-column: 1 / -1;">
+        <div class="badge" style="background: var(--gold); color: var(--dark);">5</div>
+        <h3>Hidden power rule</h3>
+        <p>Advanced features exist but are never shown to Basic users unless they go looking.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <span class="eyebrow">Basic Core Features</span>
+      <h2>The 3 questions, 9 features.</h2>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>📦 Do I have it?</h3>
+        <span class="eyebrow" style="color: var(--body)">Stock</span>
+        <ul class="feature-list">
+          <li>Add a product</li>
+          <li>See stock levels</li>
+          <li>Low stock alert</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🛒 Did I sell it?</h3>
+        <span class="eyebrow" style="color: var(--body)">Sell</span>
+        <ul class="feature-list">
+          <li>Checkout</li>
+          <li>Transaction history</li>
+          <li>Returns</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>💰 Did I make money?</h3>
+        <span class="eyebrow" style="color: var(--body)">Money</span>
+        <ul class="feature-list">
+          <li>Daily sales total</li>
+          <li>Open / close drawer</li>
+          <li>Log an expense</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" style="background: var(--white); padding: 5rem 2rem; border-radius: 16px; border: 1px solid var(--border);">
+    <div class="section-header">
+      <span class="eyebrow">Product Growth</span>
+      <h2>The 5 parts — grow with the user.</h2>
+      <p>Sell · Stock · People · Money · Grow. Each part gets deeper from Basic → Pro → Master. Same 5 parts, more power per tier.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div>
+        <h3 style="color: var(--green);">Basic <span style="font-size: 0.9rem; font-weight: 400; color: var(--body);">/ Free</span></h3>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">9 core features. Forever free. No credit card. The utang tracker + SMS automation included.</p>
+      </div>
+      <div>
+        <h3>Pro <span style="font-size: 0.9rem; font-weight: 400; color: var(--body);">/ Free</span></h3>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">More modules — CRM, suppliers, loyalty, promotions, multi-staff. Still free.</p>
+      </div>
+      <div>
+        <h3 style="color: var(--gold);">Master <span style="font-size: 0.9rem; font-weight: 400; color: var(--body);">/ ₱699/mo</span></h3>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Multi-branch, analytics, API, accountant tools. Simpler than Odoo, built for businesses that have grown.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-header">
+      <span class="eyebrow">Monetization</span>
+      <h2>How Litro earns.</h2>
+      <p>Not from users, from the ecosystem. The only direct user revenue is the Master subscription — everything else comes from the outside.</p>
+    </div>
+
+    <div>
+      <div class="revenue-row">
+        <span class="rev-phase">Phase 1 — Launch with MVP</span>
+        <div class="rev-title">🖨️ Hardware bundles + consumables</div>
+        <p>Pre-configured tablet + printer + cash drawer kit. Ongoing: receipt paper rolls, accessories. Fear of setup is the product.</p>
+      </div>
+      <div class="revenue-row">
+        <span class="rev-phase">Phase 1 — Launch with MVP</span>
+        <div class="rev-title">🔗 Supplier affiliate redirects</div>
+        <p>Low stock alert → "Reorder" button → affiliate link to supplier e-commerce. Listing fees + per-order commission. Supplier pays, not the store.</p>
+      </div>
+      <div class="revenue-row">
+        <span class="rev-phase">Phase 2</span>
+        <div class="rev-title">🏦 Embedded finance — micro-loans</div>
+        <p>Partner with Tonik, CIMB, or Blend PH. Store's sales data = pre-approved loan offer in-app. Referral fee per origination. No lending risk.</p>
+      </div>
+      <div class="revenue-row">
+        <span class="rev-phase">Phase 2 — Needs receipt volume</span>
+        <div class="rev-title">🧾 Receipt advertising</div>
+        <p>Blank receipt footer = geo-targeted ad space. FMCG brands pay CPM to appear on receipts printed in their target areas.</p>
+      </div>
+      <div class="revenue-row">
+        <span class="rev-phase">Phase 2–3</span>
+        <div class="rev-title">🏷️ White-label for distributors</div>
+        <p>Distributor pays ₱5–20k/mo for a branded Litro for their store network. One deal = hundreds of stores acquired overnight.</p>
+      </div>
+      <div class="revenue-row">
+        <span class="rev-phase">Phase 3 — Needs 6mo data</span>
+        <div class="rev-title">📊 Aggregated market data — FMCG brands</div>
+        <p>Real-time anonymized sales data from thousands of sari-sari stores. Sold to Unilever, Nestlé, San Miguel, distributors. No one in PH has this.</p>
+      </div>
+      <div class="revenue-row">
+        <span class="rev-phase">Phase 3–4 — Needs 10k+ stores</span>
+        <div class="rev-title">🛡️ Micro-insurance referrals</div>
+        <p>Partner with AXA, Igloo, or Sun Life. One-tap fire + inventory insurance inside the app. Referral commission per policy. Zero risk to Litro.</p>
+      </div>
+      <div class="revenue-row">
+        <span class="rev-phase">All Phases</span>
+        <div class="rev-title">👑 Master subscription</div>
+        <p>₱699/mo for businesses that have outgrown free. The only direct user revenue.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow" style="color: var(--gold);">Strategic Debt</span>
+        <h2>Still open — things to decide.</h2>
+      </div>
+      
+      <ul class="question-list">
+        <li>
+          <span>🏗️</span>
+          <p><strong>What tech stack</strong> — web app, native mobile, or hybrid? What's the right architecture?</p>
+        </li>
+        <li>
+          <span>📶</span>
+          <p><strong>How does offline mode work technically</strong> — local database, sync strategy?</p>
+        </li>
+        <li>
+          <span>🚀</span>
+          <p><strong>What does the exact 10-minute onboarding flow look like?</strong></p>
+        </li>
+        <li>
+          <span>📣</span>
+          <p><strong>Go-to-market</strong> — how do we get the first 1,000 stores?</p>
+        </li>
+        <li>
+          <span>🗄️</span>
+          <p><strong>Multi-tenant architecture</strong> — how do we isolate store data cleanly?</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</body>
+</html>
